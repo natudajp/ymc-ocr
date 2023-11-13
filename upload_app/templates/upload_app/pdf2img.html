@@ -1,0 +1,26 @@
+</head>
+<body>
+    <h1>{{title}}</h1>
+    
+    <div>
+        <h2>PDFを登録する</h2>
+        <form action="{% url 'pdf2img' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ pdffile_form.as_p }}</p>
+            <p><input type="submit" value="アップロード"></p>
+        </form>
+    </div>
+
+    <div>
+        {% if id is not None %}
+        <h2>PDFが登録されました</h2>
+        <p>登録されたPDF {{pdfname}} </p>
+        <p>PDFのIDは {{id}} です</p>
+        <p><a href="/pdfocr/pdfpreview/{{id}}">"pdfプレビュー"</a></p> 
+        <!--  views.pdf2image_ocr  -->
+        <p><a href="/pdfocr/pdfocr/{{id}}">"画像の確認とOcr前処理"</a></p>
+        {% endif %}
+    </div>
+
+</body>
+</html>

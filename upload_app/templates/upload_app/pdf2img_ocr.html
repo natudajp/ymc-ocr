@@ -1,0 +1,47 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'upload_app/style.css' %}">
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <div>
+        <h2>PDF ファイル ID:{{id}}の画像</h2>
+        <p>オリジナル画像ファイル名：{{original_url}}</p>
+        <p>前処理画像ファイル名：{{result_url}}</p>
+
+        <p>横向き＜＝＞縦向き変換：画像の回転角度を入力してください。
+
+        <form action="{% url 'ocr' id %}" method="post">
+            {% csrf_token %}
+            {{setting_form.as_p}}
+            <p><input type="submit" value="実行"></p>
+        </form>
+
+        <!--<img src="{{original_url}}" class="image-100vw">-->
+        {% if result_url == '' %}
+        <img src="{{original_url}}" class="image-100vw">
+        {% else %}
+        <img src="{{result_url}}" class="image-100vw">
+        {% endif %}
+        <form action="{% url 'ocr' id %}" method="post">
+            {% csrf_token %}
+            {{setting_form.as_p}}
+            <p><input type="submit" value="実行"></p>
+        </form>
+
+        <p>OCR結果:</p>
+        <ul>
+            <li>
+                <p style="white-space:pre-wrap;">{{ document }}</p>
+            </li>
+        </ul>
+        <p>エクセル出力結果
+        <a href="/{{xlsfile}}">"/{{xlsfile}}"</a>
+        </p>
+    </div>
+</body>
+</html>

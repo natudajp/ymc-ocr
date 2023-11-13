@@ -1,0 +1,20 @@
+{% extends 'upload_app/pdf_base.html' %}
+
+{% block content %}
+<div>
+  {% if id is not None %}
+  <h2>画像が登録されました</h2>
+  <p>画像のIDは {{id}} です</p>
+  {% endif %}
+</div>
+<div>
+  <h2>(PDF)ファイルを登録する。</h2>
+  <form action="{% url 'pdf2image' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <p>{{ form.as_p }}</p>
+    <p><input type="submit" value="アップロード"></p>
+    <p><button type="submit">PDFファイルのアップロード</button></p>
+  </form>
+</div>
+  <p><a href="{% url 'pdf_list' %}">戻る</a></p>
+{% endblock %}

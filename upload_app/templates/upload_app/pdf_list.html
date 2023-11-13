@@ -1,0 +1,25 @@
+{% extends 'upload_app/pdf_base.html' %}
+
+
+{% block content %}
+
+    <ul>
+        <li><a href="{% url 'pdf_list' %}">PDFファイルのリスト</a></li>
+    </ul>
+    <ul>
+        <li><a href="{% url 'pdf_upload' %}">PDFファイルの登録</a></li>
+    </ul>
+
+
+    <p>保存済みのファイル:</p>
+    <ul>
+        {% for obj in documents %}
+        <li>
+            <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
+            <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+        </li>
+        {% endfor %}
+    </ul>
+
+
+{% endblock content %}

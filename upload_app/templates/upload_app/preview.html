@@ -1,0 +1,18 @@
+{% load static %}
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>{{title}}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'upload_app/style.css' %}">
+</head>
+<body>
+    <h1>{{title}}</h1>
+    <div>
+        <h2>ID:{{id}}の画像</h2>
+        <p><a href="{% url 'pdf2img' %}">戻る</a><p>
+        <img src="{{url}}" class="image-100vw">
+        
+    </div>
+</body>
+</html>

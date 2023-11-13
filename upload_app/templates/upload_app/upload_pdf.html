@@ -1,0 +1,26 @@
+<!-- fileuploads/templates/upload_file.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload and Download PDF Files</title>
+</head>
+<body>
+    <h2>Upload PDF Files</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Upload</button>
+    </form>
+
+    <h3>Uploaded PDF Files:</h3>
+    <ul>
+        {% for file in files %}
+            <li><a href="{% url 'download_pdf' file.id %}">{{ file.file.name }}</a></li>
+        {% empty %}
+            <li>No files uploaded yet.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
